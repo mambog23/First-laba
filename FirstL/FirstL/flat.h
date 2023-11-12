@@ -16,7 +16,8 @@ public:
 	~Flat();
 	Flat(const Flat&);
 	void setVal() override;
-
+	Flat(string figure, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5,
+		double S, double AB, double BC, double CD, double DE, double AC, double AD, double AE, Flat& obj);
 
 	void Build4(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, COLORREF color);
 	void Build3(int x1, int y1, int x2, int y2, int x3, int y3, COLORREF color);

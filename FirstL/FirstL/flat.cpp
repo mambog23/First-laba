@@ -5,6 +5,32 @@
 #pragma comment(lib,"graphics.lib")
 using namespace std;
 
+Flat::Flat(string figure, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5,
+	double S, double AB, double BC, double CD, double DE, double AC, double AD, double AE, Flat& obj) {
+	setlocale(LC_ALL, "Russian");
+	cout << "Вызов конструктора с параметром для класса Flat" << endl << endl;
+	obj.figure = figure;
+	obj.x1 = x1;
+	obj.y1 = y1;
+	obj.x2 = x2;
+	obj.y2 = y2;
+	obj.x3 = x3;
+	obj.y3 = y3;
+	obj.x4 = x4;
+	obj.y4 = y4;
+	obj.x5 = x5;
+	obj.y5 = y5;
+
+	obj.S = S;
+	obj.AB = AB;
+	obj.BC = BC;
+	obj.CD = CD;
+	obj.DE = DE;
+	obj.AC = AC;
+	obj.AD = AD;
+	obj.AE = AE;
+}
+
 Flat::Flat() {
 	setlocale(LC_ALL, "Russian");
 	cout << "Вызов конструктора по умолчанию для класса Flat" << endl << endl;
@@ -27,7 +53,7 @@ void Flat::setVal() {
 	cin >> *this;
 }
 
-ifstream& operator>>(ifstream& fin, Flat& obj) { // Функция чтения файла объекта (Работник)
+ifstream& operator>>(ifstream& fin, Flat& obj) { // Функция чтения файла объекта (flat)
 	fin >> obj.figure >> obj.x1 >> obj.y1 >> obj.x2 >> obj.y2 >> obj.x3 >> obj.y3 >> obj.x4 >> obj.y4 >> obj.x5 >> obj.y5;
 	fin >> obj.R >> obj.AB >> obj.BC >> obj.CD >> obj.DE >> obj.AC >> obj.AD >> obj.AE >> obj.S;
 	return fin;
@@ -57,7 +83,7 @@ Flat& Flat::operator=(const Flat& other) {
 	return *this;
 }
 
-ofstream& operator<<(ofstream& fout, Flat& obj) { // Функция записи в файл объекта(Работник)
+ofstream& operator<<(ofstream& fout, Flat& obj) { // Функция записи в файл объекта(flat)
 	fout << obj.figure << endl;
 	fout << obj.x1 << endl;
 	fout << obj.y1 << endl;
@@ -82,7 +108,7 @@ ofstream& operator<<(ofstream& fout, Flat& obj) { // Функция записи в файл объек
 	return fout;
 }
 
-ostream& operator<<(ostream& out, Flat& obj) { // Функция вывода на экран данных объекта(Работник)
+ostream& operator<<(ostream& out, Flat& obj) { // Функция вывода на экран данных объекта(flat)
 	setlocale(LC_ALL, "Russian");
 	out << "Тип фигуры: " << obj.figure << endl;
 	//out << obj.x1 << endl;
@@ -111,10 +137,21 @@ ostream& operator<<(ostream& out, Flat& obj) { // Функция вывода на экран данных
 	if (obj.AD != 0) out << "AD = " << obj.AD << endl;
 	if (obj.AE != 0) out << "AE = " << obj.AE << endl;
 	out << "S = " << obj.S << endl;
+	Flat f;
+	//initwindow(700, 500); // инициализация окна 
+	if (obj.x2 == 0 && obj.y2 == 0 && obj.x3 == 0 && obj.y3 == 0 &&
+		obj.x4 == 0 && obj.y4 == 0 && obj.x5 == 0 && obj.y5 == 0) f.Build0(obj.x1, obj.y1, obj.R, 13);
+	if (obj.x3 != 0 && obj.y3 != 0 && obj.x4 == 0 && obj.y4 == 0
+		&& obj.x5 == 0 && obj.y5 == 0) f.Build3(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, 13);
+	if (obj.x4 != 0 && obj.y4 != 0
+		&& obj.x5 == 0 && obj.y5 == 0) f.Build4(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, obj.x4, obj.y4, 13);
+	if (obj.x5 != 0 && obj.y5 != 0) f.Build5(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, obj.x4, obj.y4, obj.x5, obj.y5, 13);
+	//system("pause");
+	//closegraph(); // выход из графического режима
 	return out;
 }
 
-istream& operator>>(istream& in, Flat& obj) { // Функция ввода данных объекта (Работник)
+istream& operator>>(istream& in, Flat& obj) { // Функция ввода данных объекта (flat)
 	Flat f;
 	int button;
 	bool flag = true; // Для проверки логических условий (флаг состояний), как выключатель - ВКЛ и ВЫКЛ

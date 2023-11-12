@@ -37,10 +37,10 @@ int main() {
 		}
 		switch (button) {
 		case 1:
-			menu(flat, "flat.txt"); // Вызов меню (Мебель)
+			menu(flat, "flat.txt"); // Вызов меню (flat)
 			break;
 		case 2:
-			menu(volume, "volume.txt"); // Вызов меню (Работник)
+			menu(volume, "volume.txt"); // Вызов меню (volume)
 			break;
 		case 0:
 			flag = false; // Выход из программы

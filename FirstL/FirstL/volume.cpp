@@ -5,6 +5,42 @@
 #pragma comment(lib,"graphics.lib")
 using namespace std;
 
+Volume::Volume(string figure, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5, int x6, int y6,
+	double V, double AB, double BC, double CD, double DE, double AC, double AD, double AE, double BD,
+	double BE, double CF, double EF, double DF, double CE, Volume& obj) {
+	setlocale(LC_ALL, "Russian");
+	cout << "Вызов конструктора с параметром для класса Volume" << endl << endl;
+	obj.figure = figure;
+	obj.x1 = x1;
+	obj.y1 = y1;
+	obj.x2 = x2;
+	obj.y2 = y2;
+	obj.x3 = x3;
+	obj.y3 = y3;
+	obj.x4 = x4;
+	obj.y4 = y4;
+	obj.x5 = x5;
+	obj.y5 = y5;
+	obj.x6 = x6;
+	obj.y6 = y6;
+
+	obj.V = V;
+	obj.AB = AB;
+	obj.BC = BC;
+	obj.CD = CD;
+	obj.DE = DE;
+	obj.AC = AC;
+	obj.AD = AD;
+	obj.AE = AE;
+
+	obj.BD = BD;
+	obj.BE = BE;
+	obj.CF = CF;
+	obj.EF = EF;
+	obj.DF = DF;
+	obj.CE = CE;
+}
+
 Volume::Volume() {
 	setlocale(LC_ALL, "Russian");
 	cout << "Вызов конструктора по умолчанию для класса Volume" << endl << endl;
@@ -31,7 +67,7 @@ void Volume::setVal() {
 	cin >> *this;
 }
 
-ifstream& operator>>(ifstream& fin, Volume& obj) { // Функция чтения файла объекта (Работник)
+ifstream& operator>>(ifstream& fin, Volume& obj) { // Функция чтения файла объекта (volume)
 	fin >> obj.figure >> obj.x1 >> obj.y1 >> obj.z1 >>
 		obj.x2 >> obj.y2 >> obj.z2 >>
 		obj.x3 >> obj.y3 >> obj.z3 >>
@@ -84,7 +120,7 @@ Volume& Volume::operator=(const Volume& other) {
 	return *this;
 }
 
-ofstream& operator<<(ofstream& fout, Volume& obj) { // Функция записи в файл объекта(Работник)
+ofstream& operator<<(ofstream& fout, Volume& obj) { // Функция записи в файл объекта(volume)
 	fout << obj.figure << endl;
 	fout << obj.x1 << endl;
 	fout << obj.y1 << endl;
@@ -124,7 +160,7 @@ ofstream& operator<<(ofstream& fout, Volume& obj) { // Функция записи в файл объ
 	return fout;
 }
 
-ostream& operator<<(ostream& out, Volume& obj) { // Функция вывода на экран данных объекта(Работник)
+ostream& operator<<(ostream& out, Volume& obj) { // Функция вывода на экран данных объекта(volume)
 	setlocale(LC_ALL, "Russian");
 	out << "Тип фигуры: " << obj.figure << endl;
 	out << "Координаты:" << endl;
@@ -150,10 +186,20 @@ ostream& operator<<(ostream& out, Volume& obj) { // Функция вывода на экран данн
 	if (obj.CE != 0) out << "CE = " << obj.CE << endl;
 
 	out << "V = " << obj.V << endl;
+	Volume v;
+	//initwindow(700, 500); // инициализация окна 
+	if (obj.x5 == 0 && obj.y5 == 0 && obj.x6 == 0 && obj.y6 == 0)
+		v.Build_tet(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, obj.x4, obj.y4, 13);
+	if (obj.x4 != 0 && obj.y4 != 0 && obj.x5 != 0 && obj.y5 != 0 && obj.x6 == 0 && obj.y6 == 0)
+		v.Build_pir(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, obj.x4, obj.y4, obj.x5, obj.y5, 13);
+	if (obj.x4 != 0 && obj.y4 != 0 && obj.x5 != 0 && obj.y5 != 0 && obj.x6 != 0 && obj.y6 != 0)
+		v.Build_priz(obj.x1, obj.y1, obj.x2, obj.y2, obj.x3, obj.y3, obj.x4, obj.y4, obj.x5, obj.y5, obj.x6, obj.y6, 13);
+	//system("pause");
+	//closegraph(); // выход из графического режима
 	return out;
 }
 
-istream& operator>>(istream& in, Volume& obj) { // Функция ввода данных объекта (Работник)
+istream& operator>>(istream& in, Volume& obj) { // Функция ввода данных объекта (volume)
 	Volume v;
 	int button;
 	bool flag = true; // Для проверки логических условий (флаг состояний), как выключатель - ВКЛ и ВЫКЛ

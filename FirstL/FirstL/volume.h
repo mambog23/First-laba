@@ -17,10 +17,9 @@ public:
 	Volume(const Volume&);
 	void setVal() override;
 	void push(const Volume& obj);
-
-
-
-
+	Volume(string figure, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int x5, int y5, int x6, int y6,
+		double V, double AB, double BC, double CD, double DE, double AC, double AD, double AE, double BD,
+		double BE, double CF, double EF, double DF, double CE, Volume& obj);
 
 	//Тетраэдр
 	void Build_tet(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, COLORREF color);
